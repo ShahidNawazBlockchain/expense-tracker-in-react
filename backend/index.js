@@ -15,8 +15,10 @@ app.use(express.json());
 
 // routes
 readdirSync("./routes").map((route) =>
-  app.use("/api/v1", require("./routes/" + route))
+  app.use("/api/v1", require(`./routes/${route}`))
 );
+const routes = readdirSync("./routes");
+console.log(routes);
 const Server = () => {
   db();
   app.listen(PORT, () => {
