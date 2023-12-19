@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+
 const { db } = require("./db/db");
 const app = express();
 
@@ -11,11 +12,11 @@ app.use(cors());
 app.use(express.json());
 
 // routes
-const routes = ["transactions"]; // Add more route names as needed
+const incomeRoutes = require("./routes/income");
+const expenseRoutes = require("./routes/expense");
 
-routes.forEach((route) =>
-  app.use(`/api/v1/${route}`, require(`./routes/${route}`))
-);
+app.use("/api/v1", incomeRoutes);
+app.use("/api/v1", expenseRoutes);
 
 const Server = () => {
   db();
